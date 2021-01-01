@@ -1,18 +1,18 @@
 let newsArticles = [];
 const API_KEY = "7ad27e6d8c4b4c818cca946bf4dfac73";
 
-async function update(){
-    // let url = `http://newsapi.org/v2/everything?q=javscript&from=2020-11-30&sortBy=publishedAt&language=en&apiKey=${API_KEY}`;
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
-    const result = await fetch(url);
-    const data = await result.json();
-    console.log(data);
-    newsArticles = data.articles;
+async function update() {
+  // let url = `http://newsapi.org/v2/everything?q=javscript&from=2020-11-30&sortBy=publishedAt&language=en&apiKey=${API_KEY}`;
+  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
+  const result = await fetch(url);
+  const data = await result.json();
+  console.log(data);
+  newsArticles = data.articles;
 
-    render();
+  render();
 }
-function renderArticleCard(article){
-    return`
+function renderArticleCard(article) {
+  return `
     <div class="col-md-4 col-sm-6"
         <div class="card news-article">
             <img class="card-img-top" src="${article.urlToImage}" 
@@ -27,11 +27,29 @@ function renderArticleCard(article){
         </div>
         </div>
     </div>
-    `
+    `;
 }
 
-function render(){
-    let resultsArea = document.getElementById("results");
-    resultsArea.innerHTML = newsArticles.map(article => renderArticleCard(article)).join("\n");
+function render() {
+  let resultsArea = document.getElementById("results");
+  resultsArea.innerHTML = newsArticles
+    .map((article) => renderArticleCard(article))
+    .join("\n");
 }
 update();
+
+let loadMore = document.getElementById("loadMore");
+loadMore.addEventListener("click", updateMore);
+async function updateMore(e) {
+  e.preventDefault();
+  let url = `https://newsapi.org/v2/top-headlines?country=us&page=2&apiKey=${API_KEY}`;
+  const result = await fetch(url);
+  const newData = await result.json();
+  console.log(newData);
+  // newsArticles.concat(newData.articles); /// do not work ?
+  // newsArticles = [...newData.articles];/// it will give the new news but it's refresh the page n lost old news
+
+  newsArticles.push(...newData.articles);
+  loadMore.style.visibility = "hidden";
+  render();
+}
