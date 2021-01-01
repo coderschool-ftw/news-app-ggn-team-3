@@ -18,6 +18,7 @@ async function update(){
 }
 function updateSourceObj(){
     // expected: SourceObj = { BBC: 2, CNN: 1, NewYork: 3}
+    SourceObj = {};
     newsArticles.map(article => {
         let key = article.source.name;
         if (SourceObj.hasOwnProperty(key)) {
@@ -63,6 +64,7 @@ function renderCheckBox(key){
 }
 function renderCheckBoxArea(){
     let checkBoxArea = document.getElementById("checkBox"); 
+    checkBoxArea.innerHTML = "";
     for(let key in SourceObj){
         checkBoxArea.innerHTML += renderCheckBox(key);
     }
@@ -92,6 +94,7 @@ async function updateMore(e) {
 
   loadMore.style.visibility = "hidden";
 
+  updateSourceObj();
   render();
   renderCheckBoxArea();
 }
