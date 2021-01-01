@@ -29,8 +29,8 @@ function updateSourceObj(){
     });
     console.log(SourceObj);
 }
-function renderArticleCard(article){
-    return`
+function renderArticleCard(article) {
+  return `
     <div class="col-md-4 col-sm-6"
         <div class="card news-article">
             <p>${article.source.name}</p>
@@ -46,7 +46,7 @@ function renderArticleCard(article){
             </div>
         </div>
     </div>
-    `
+    `;
 }
 
 function render(){
@@ -68,7 +68,6 @@ function renderCheckBoxArea(){
     }
 }
 function toggleSource (event){
-    console.log(event.target);
     //update newsArticles
     newsArticles.forEach(article => {
         if(article.source.name === event.target.value){
@@ -78,3 +77,21 @@ function toggleSource (event){
     render();
 }
 update();
+
+let loadMore = document.getElementById("loadMore");
+loadMore.addEventListener("click", updateMore);
+async function updateMore(e) {
+  e.preventDefault();
+  let url = `https://newsapi.org/v2/top-headlines?country=us&page=2&apiKey=${API_KEY}`;
+  const result = await fetch(url);
+  const data = await result.json();
+  let newArray = data.articles;
+
+  newArray = newArray.map(x => ({...x, Checked: true}));
+  newsArticles.push(...newArray);
+
+  loadMore.style.visibility = "hidden";
+
+  render();
+  renderCheckBoxArea();
+}
