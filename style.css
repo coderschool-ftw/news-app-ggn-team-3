@@ -16,3 +16,29 @@
 #loadMore a:hover {
   background-color: #042a63;
 }
+.title {
+  font-size: 23px;
+  color: black;
+}
+
+#navbarSupportedContent {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+#nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 57px;
+}
+.container {
+  margin-top: 78px;
+}
+#category {
+  position: fixed;
+  width: 200px;
+}
+#center-col {
+  margin-left: 200px;
+  width: 68%;
+}
