@@ -1,5 +1,5 @@
 let newsArticles = [];
-const API_KEY = "7ad27e6d8c4b4c818cca946bf4dfac73";
+const API_KEY = "97a8df3625884a2da87308f934ecfbbd";
 let SourceObj = {};
 let numOfArticle = 0;
 let url = "";
@@ -12,6 +12,7 @@ let categories = [
   "Sports",
   "Technology",
 ];
+let cat ="general";
 
 function updateSourceObj() {
   // expected: SourceObj = { BBC: 2, CNN: 1, NewYork: 3}
@@ -30,12 +31,12 @@ function renderArticleCard(article) {
   return `
     <div class="col-md-4 col-sm-6"
         <div class="card news-article">
-            <p>${article.source.name}</p>
             <img class="card-img-top" src="${article.urlToImage}" 
             onerror="this.onerror=null;this.src='image/default.png';">
             <div class="card-body">
                 <h5 class="card-title">${article.title}</h5>
                 <p class="card-text">${article.description}</p>
+                <p class="text-muted">${article.source.name}</p>
                 <a href="${article.url}" class="btn btn-primary">View Story</a>
             </div>
             <div class="card-footer">
@@ -55,6 +56,9 @@ function render() {
     .filter((article) => article.Checked === true)
     .map((article) => renderArticleCard(article))
     .join("\n");
+
+  numOfArticle = newsArticles.filter((article) => article.Checked === true).length;
+  document.getElementById("numOfArticle").innerHTML = ` (${numOfArticle})`; //load number of article
 }
 
 // belong to checkbox
@@ -86,7 +90,7 @@ function toggleSource(event) {
 //The user should see new stories related to the category he/she chose.
 function renderCategory() {
   categories.map((category) => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&${category}&apiKey=${API_KEY}`;
+    //let url = `https://newsapi.org/v2/top-headlines?country=us&${category}&apiKey=${API_KEY}`;
 
     document.getElementById(
       "category"
@@ -97,10 +101,11 @@ function renderCategory() {
 }
 
 function haha(event) {
-  let cat = event.target.id;
+  cat = event.target.id;
   url = `https://newsapi.org/v2/top-headlines?country=us&category=${cat}&apiKey=${API_KEY}`;
   console.log("haha");
   console.log(url);
+  loadMore.style.visibility = "visible";
   update();
 }
 //rendercategory=> button=> function onclick
@@ -116,8 +121,8 @@ async function update() {
   const data = await result.json();
   console.log(data);
   newsArticles = data.articles;
-  numOfArticle = newsArticles.length;
-  console.log(numOfArticle);
+  // numOfArticle = newsArticles.length;
+  // console.log(numOfArticle);
   newsArticles = newsArticles.map((x) => ({ ...x, Checked: true }));
   console.log(newsArticles);
   loadMore.addEventListener("click", updateMore);
@@ -125,7 +130,7 @@ async function update() {
   render();
   renderCheckBoxArea();
 
-  document.getElementById("numOfArticle").innerHTML = ` (${numOfArticle})`; //load number of article
+  // document.getElementById("numOfArticle").innerHTML = ` (${numOfArticle})`; //load number of article
 }
 
 update();
@@ -133,18 +138,18 @@ update();
 let loadMore = document.getElementById("loadMore");
 async function updateMore(e) {
   e.preventDefault();
-  let url = `https://newsapi.org/v2/top-headlines?country=us&page=2&apiKey=${API_KEY}`;
+  let url = `https://newsapi.org/v2/top-headlines?country=us&category=${cat}&page=2&apiKey=${API_KEY}`;
   const result = await fetch(url);
   const data = await result.json();
   let newArray = data.articles;
 
   newArray = newArray.map((x) => ({ ...x, Checked: true }));
   newsArticles.push(...newArray);
-  numOfArticle = newsArticles.length;
-  document.getElementById("numOfArticle").innerHTML = ` (${numOfArticle})`; //load number of article
+  // numOfArticle = newsArticles.length;
+  // document.getElementById("numOfArticle").innerHTML = ` (${numOfArticle})`; //load number of article
   loadMore.style.visibility = "hidden";
 
-  /* updateSourceObj(); */
+  updateSourceObj(); 
   render();
   renderCheckBoxArea();
 }
