@@ -40,7 +40,7 @@ function renderArticleCard(article) {
                 <a href="${article.url}" class="btn btn-primary">View Story</a>
             </div>
             <div class="card-footer">
-                <small class="text-muted">${moment(article.publishAt)
+                <small class="text-muted">${moment(article.publishedAt)
                   .startOf("hour")
                   .fromNow()}</small>
             </div>
