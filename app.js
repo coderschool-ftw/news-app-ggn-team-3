@@ -12,7 +12,7 @@ let categories = [
   "Sports",
   "Technology",
 ];
-let cat ="general";
+let cat = "general";
 
 function updateSourceObj() {
   // expected: SourceObj = { BBC: 2, CNN: 1, NewYork: 3}
@@ -29,15 +29,15 @@ function updateSourceObj() {
 }
 function renderArticleCard(article) {
   return `
-    <div class="col-md-4 col-sm-6"
+    <div class="col-md-4 col-sm-6 card-bot"
         <div class="card news-article">
-            <img class="card-img-top" src="${article.urlToImage}" 
+            <img class="card-img-top card-image" src="${article.urlToImage}" 
             onerror="this.onerror=null;this.src='image/default.png';">
             <div class="card-body">
                 <h5 class="card-title">${article.title}</h5>
                 <p class="card-text">${article.description}</p>
                 <p class="text-muted">${article.source.name}</p>
-                <a href="${article.url}" class="btn btn-primary">View Story</a>
+                <a href="${article.url}" class="btn btn-warning">View Story</a>
             </div>
             <div class="card-footer">
                 <small class="text-muted">${moment(article.publishedAt)
@@ -57,7 +57,8 @@ function render() {
     .map((article) => renderArticleCard(article))
     .join("\n");
 
-  numOfArticle = newsArticles.filter((article) => article.Checked === true).length;
+  numOfArticle = newsArticles.filter((article) => article.Checked === true)
+    .length;
   document.getElementById("numOfArticle").innerHTML = ` (${numOfArticle})`; //load number of article
 }
 
@@ -65,7 +66,7 @@ function render() {
 function renderCheckBox(key) {
   return `
         <input type="checkbox" class="btn-check" checked onchange="toggleSource(event)" value="${key}" id="${key}">
-        <label class="btn btn-outline-primary mb-2" for="${key}">${key} (${SourceObj[key]})</label>
+        <label class="btn btn-outline-success mb-2" for="${key}">${key} (${SourceObj[key]})</label>
     `;
 }
 
@@ -94,7 +95,7 @@ function renderCategory() {
 
     document.getElementById(
       "category"
-    ).innerHTML += `<button id="${category}" onclick="haha(event)" type="button" class="list-group-item list-group-item-action">${category}</button>`;
+    ).innerHTML += `<button id="${category}" onclick="haha(event)" type="button" style="border-left:none;border-right:none" class="list-group-item list-group-item-action">${category}</button>`;
     /* document.getElementById(`${category}`).addEventListener("click", haha);
     console.log(document.getElementById(`${category}`)); */
   });
@@ -149,7 +150,7 @@ async function updateMore(e) {
   // document.getElementById("numOfArticle").innerHTML = ` (${numOfArticle})`; //load number of article
   loadMore.style.visibility = "hidden";
 
-  updateSourceObj(); 
+  updateSourceObj();
   render();
   renderCheckBoxArea();
 }

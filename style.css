@@ -42,3 +42,20 @@
   margin-left: 200px;
   width: 68%;
 }
+.btn-check {
+  color: green;
+}
+.card-bot {
+  margin-bottom: 30px;
+}
+.card-image {
+  width: 100%;
+  height: 150px;
+}
+#category > button:hover {
+  color: green;
+}
+#category > button:active {
+  background-color: green;
+  color: white;
+}
