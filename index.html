@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google News</title>
+    <link rel="shortcut icon" href="#" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="nav">
+      <div>
+      <a href="#" class="avbar-brand">
+        <img src="/image/googlelogo_clr_74x24px.png" height="30" class="gg">
+      </a>
+      <h1 class="title" style="display:inline">News</h1>
+        <h1 class="title" id="numOfArticle"style="display:inline"> </h1>
+    </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0" style="display:flex;">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+ 
+
+
+
+    <div class="container">
+        
+        <div class="row">
+            <div id="category" class="col-md-2 list-group">
+            </div>
+            <div class="col-md-8" id="center-col">
+                <div id="results" class="row"></div>
+                <div id="loadMore">
+                  <a href="as" class="text-decoration-none">Load More</a>
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div id="checkBox" class="btn-group-vertical btn-group-sm" role="group"></div>
+            </div>
+        </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
